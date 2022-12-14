@@ -30,9 +30,11 @@ public NARROWGUI() {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setTitle("NARROWEYE - CAI");
     try {
-        n_Login();
+        if (n_Login() == true)  {
+            System.out.println("Gotcha");
+        }
     } catch(Exception e) {
-
+        System.out.println(e);
     }
 }
 
@@ -43,17 +45,24 @@ public NARROWGUI() {
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               return narrowLOGIN(username,passphrase);
+                if (narrowLOGIN(username,passphrase) == true) {
+                    System.out.println("Win");
+                    // OPEN MAIN GUI
+                }
             }
         });
         passphrase.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
-                   return narrowLOGIN(username,passphrase);
+                    if (narrowLOGIN(username,passphrase) == true) {
+                        System.out.println("Win");
+                        // OPEN MAIN GUI
+                    }
                 }
             }
         });
+        return true;
     }
 
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
@@ -72,16 +81,17 @@ public NARROWGUI() {
         }
         return hexString.toString();
     }
-    static String narrowLOGIN(JTextField username, JPasswordField passphrase) {
+    static boolean narrowLOGIN(JTextField username, JPasswordField passphrase) {
         String j = username.getText();
         String password = passphrase.getText() + "cai-4-lyfe-88579";
         System.out.println(j + password);
         try {
             System.out.println(toHexString(getSHA(password)));
+            return true;
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
+            return false;
         }
-        return "0";
     }
 
     public static void main(String[] args) {
