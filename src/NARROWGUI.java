@@ -9,6 +9,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.*;
 
 // Java core by Joshua Wilkinson - TEAM_17
 // Definitely couldn't do SHA-256 off the top of my head, Reference: https://www.geeksforgeeks.org/sha-256-hash-in-java/
@@ -19,7 +20,16 @@ public class NARROWGUI extends JFrame {
     private JTextField username;
     private JPasswordField passphrase;
     private JButton LOGINButton;
-public NARROWGUI() {
+    private JLabel AGENCYLOGINLabel;
+    private JLabel unauthorizedAccessOrUseLabel;
+    private JTabbedPane tabbedPane1;
+    private JLabel backgroundlogo;
+    private JPanel Home;
+    private JPanel Administration;
+    private JPanel Agents;
+    private JPanel Missions;
+
+    public NARROWGUI() {
     try {
         final BufferedImage logo = ImageIO.read(getClass().getResource("res/logo.png"));
         setIconImage(logo);
@@ -39,14 +49,13 @@ public NARROWGUI() {
 }
 
     public boolean n_Login() throws Exception{
-        setSize(500,175);
+        setSize(1280,720);
         setVisible(true);
         setResizable(false);
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (narrowLOGIN(username,passphrase) == true) {
-                    System.out.println("Win");
+                if (narrowLOGIN(username,passphrase)) {
                     // OPEN MAIN GUI
                 }
             }
@@ -55,9 +64,10 @@ public NARROWGUI() {
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
-                    if (narrowLOGIN(username,passphrase) == true) {
-                        System.out.println("Win");
+                    if (narrowLOGIN(username,passphrase)) {
+                          connect();
                         // OPEN MAIN GUI
+                        initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
                     }
                 }
             }
@@ -65,6 +75,14 @@ public NARROWGUI() {
         return true;
     }
 
+    public static void initialize(JTextField username,JPasswordField passphrase,JButton LOGINButton,JLabel AGENCYLOGINLabel,JLabel unauthorizedAccessOrUseLabel, JTabbedPane maincontainer) {
+        username.setVisible(false);
+        passphrase.setVisible(false);
+        LOGINButton.setVisible(false);
+        AGENCYLOGINLabel.setVisible(false);
+        unauthorizedAccessOrUseLabel.setVisible(false);
+        maincontainer.setVisible(true);
+    }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -92,6 +110,20 @@ public NARROWGUI() {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
             return false;
         }
+    }
+    static void connect() {
+            try {
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                Connection con = DriverManager.getConnection(
+                        "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM BETAAGENTS");
+                while (rs.next())
+                    System.out.println(rs.getString("PASSWORDS"));
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
 
     public static void main(String[] args) {
