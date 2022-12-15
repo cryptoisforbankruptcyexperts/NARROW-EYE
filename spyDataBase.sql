@@ -11,6 +11,7 @@ DROP TABLE AlphaAgents;
 DROP TABLE BetaAgents;
 DROP TABLE OperationDirector;
 DROP TABLE SkillSet;
+
 DROP TABLE WeaponsData;
 
 
