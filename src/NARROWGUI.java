@@ -82,7 +82,8 @@ public class NARROWGUI extends JFrame {
         AGENCYLOGINLabel.setVisible(false);
         unauthorizedAccessOrUseLabel.setVisible(false);
         maincontainer.setVisible(true);
-        executequery("SELECT * FROM ALPHAAGENTS");
+        // THIS IS AN EXAMPLE OF WHAT THE FUNCTION DOES, WILL PRINT IN TERMINAL.
+        executeQuery("SELECT * FROM ALPHAAGENTS");
     }
 
     public void invalidpassword() {
@@ -123,8 +124,9 @@ public class NARROWGUI extends JFrame {
         }
     }
 
-    static String[] executequery(String query) {
+    static String[] executeQuery(String query) {
         // USE THIS METHOD TO GET WHATEVER DATA YOU NEED, RETURNS STRING ARRAY WITH DATA.
+        // NOT FINISHED, WILL NEED MINOR MODIFICATION TO FILL THE RESULTS INSTEAD OF JUST PRINTING.
         String results[] = {};
         try {
             // Aware that this would never be usable in a real program since you could just intercept the return value to gain access.
