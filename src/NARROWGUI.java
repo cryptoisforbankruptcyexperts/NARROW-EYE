@@ -13,8 +13,6 @@ import java.sql.*;
 
 // Java core by Joshua Wilkinson - TEAM_17
 // Definitely couldn't do SHA-256 off the top of my head, Reference: https://www.geeksforgeeks.org/sha-256-hash-in-java/
-// "If it doesn't put me on a watch list, I've failed."
-
 public class NARROWGUI extends JFrame {
     private JPanel narrowLogin;
     private JTextField username;
@@ -56,7 +54,9 @@ public class NARROWGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (narrowLOGIN(username,passphrase)) {
-                    // OPEN MAIN GUI
+                    initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
+                } else {
+                    invalidpassword();
                 }
             }
         });
@@ -65,9 +65,9 @@ public class NARROWGUI extends JFrame {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
                     if (narrowLOGIN(username,passphrase)) {
-                          connect();
-                        // OPEN MAIN GUI
                         initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
+                    } else {
+                        invalidpassword();
                     }
                 }
             }
@@ -82,6 +82,13 @@ public class NARROWGUI extends JFrame {
         AGENCYLOGINLabel.setVisible(false);
         unauthorizedAccessOrUseLabel.setVisible(false);
         maincontainer.setVisible(true);
+    }
+
+    public void invalidpassword() {
+        JOptionPane.showMessageDialog(narrowLogin,
+                "You have entered an invalid password. Please try again.",
+                "Invalid password",
+                JOptionPane.ERROR_MESSAGE);
     }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
@@ -104,26 +111,42 @@ public class NARROWGUI extends JFrame {
         String password = passphrase.getText() + "cai-4-lyfe-88579";
         System.out.println(j + password);
         try {
-            System.out.println(toHexString(getSHA(password)));
-            return true;
+            if (connect(j, toHexString(getSHA(password)))) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
             return false;
         }
     }
-    static void connect() {
+    static boolean connect(String username, String password) {
+            boolean success = false;
             try {
+                // Aware that this would never be usable in a real program since you could just intercept the return value to gain access.
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 Connection con = DriverManager.getConnection(
                         "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
                 Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM BETAAGENTS");
-                while (rs.next())
-                    System.out.println(rs.getString("PASSWORDS"));
-                con.close();
+                String query = "SELECT (CASE WHEN ALPHA.PASSWORDS = '" + password + "' THEN 'TRUE' ELSE 'FALSE' END) AS SUCCESS_ FROM ALPHAAGENTS ALPHA WHERE ALPHA.EMPID = '" + username + "'";
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    System.out.println(rs.getString("SUCCESS_").trim());
+                    if (rs.getString("SUCCESS_").trim().equals("TRUE")) {
+                        con.close();
+                        success = true;
+                    }
+                    if (success == true) {
+                        break;
+                    }
+                }
             } catch (Exception e) {
                 System.out.println(e);
+                success = false;
             }
+            System.out.println(success);
+            return success;
     }
 
     public static void main(String[] args) {
