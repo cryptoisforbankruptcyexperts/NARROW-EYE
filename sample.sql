@@ -1,0 +1,12 @@
+INSERT INTO BetaAgents values ('BQ1465736','Dennis Lord','John',145755,'Nicole Kennedy','UPI1450503','Ossetic',6,'dac3169ae19731ae1a26d9142496b25e0f98b01bb61a91cef59969566f44538a');
+INSERT INTO SkillSet values ('SK1436091','Communication','Yes',996,'Yes');
+INSERT INTO WeaponsData values ('WP1402047','drone','Yes','Yes','Yes');
+INSERT INTO AlphaAgents values ('AE1451763','Kati Mcgraw','Hanna',128282,'Alex','NPI13012231','Ukranian','191','Russian','forehead','USIS1455598','dac3169ae19731ae1a26d9142496b25e0f98b01bb61a91cef59969566f44538a','SK1436091','WP1402047');
+INSERT INTO TechnicalSkills values ('TC1480248','Btrieve',4,'Yes','medium','Program Management','BQ1465948');
+INSERT INTO TerroristsInformation values ('TR1472979','Jennifer Martin','Griselda','182','redWhite','russian','32.6963741','Yes','CX1410110','BQ1465736','AE1451763');
+INSERT INTO Budget values ('MagnetPlating','12-17-2019 11:56:40','808','AE1451763','CX1410110');
+INSERT INTO Informers values ('IF1497394','Kari Robinson','Beaulah','Lifeguard','5','BQ1465736');
+INSERT INTO ElectronicDevices values ('XYZ1464886','Alfa AWUS036ACH USB Wi-Fi Adapter','prtn2007','21946','No','Yes','BQ1465736');
+INSERT INTO TerroristActivities values ('11-26-2022 11:56:40','38.624235','47','critical','AE1451763');
+INSERT INTO Causalities values ('11-26-2022 11:56:40','38.624235','Mark Gismondi','Bakhmut','Ossetic','65018');
+INSERT INTO Patrolling values ('PTI1411353','12-14-2022 11:56:40','Krasnodon',' patrol car','onComplaint','Lloyd Charlesworth','AE1451763');
