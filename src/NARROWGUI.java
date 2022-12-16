@@ -82,6 +82,7 @@ public class NARROWGUI extends JFrame {
         AGENCYLOGINLabel.setVisible(false);
         unauthorizedAccessOrUseLabel.setVisible(false);
         maincontainer.setVisible(true);
+        executequery("SELECT * FROM ALPHAAGENTS");
     }
 
     public void invalidpassword() {
@@ -121,6 +122,34 @@ public class NARROWGUI extends JFrame {
             return false;
         }
     }
+
+    static String[] executequery(String query) {
+        // USE THIS METHOD TO GET WHATEVER DATA YOU NEED, RETURNS STRING ARRAY WITH DATA.
+        String results[] = {};
+        try {
+            // Aware that this would never be usable in a real program since you could just intercept the return value to gain access.
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet resultSet = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print(",  ");
+                    String columnValue = resultSet.getString(i);
+                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+                }
+                System.out.println("");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return results;
+    }
+
     static boolean connect(String username, String password) {
             boolean success = false;
             try {
