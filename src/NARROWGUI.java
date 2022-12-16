@@ -13,6 +13,8 @@ import java.sql.*;
 
 // Java core by Joshua Wilkinson - TEAM_17
 // Definitely couldn't do SHA-256 off the top of my head, Reference: https://www.geeksforgeeks.org/sha-256-hash-in-java/
+// "If it doesn't put me on a watch list, I've failed."
+
 public class NARROWGUI extends JFrame {
     private JPanel narrowLogin;
     private JTextField username;
@@ -28,23 +30,23 @@ public class NARROWGUI extends JFrame {
     private JPanel Missions;
 
     public NARROWGUI() {
-    try {
-        final BufferedImage logo = ImageIO.read(getClass().getResource("res/logo.png"));
-        setIconImage(logo);
-    } catch(Exception e) {
-        System.out.println("Epic fail");
-    }
-    setContentPane(narrowLogin);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setTitle("NARROWEYE - CAI");
-    try {
-        if (n_Login() == true)  {
-            System.out.println("Gotcha");
+        try {
+            final BufferedImage logo = ImageIO.read(getClass().getResource("res/logo.png"));
+            setIconImage(logo);
+        } catch(Exception e) {
+            System.out.println("Epic fail");
         }
-    } catch(Exception e) {
-        System.out.println(e);
+        setContentPane(narrowLogin);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("NARROWEYE - CAI");
+        try {
+            if (n_Login() == true)  {
+                System.out.println("Gotcha");
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
-}
 
     public boolean n_Login() throws Exception{
         setSize(1280,720);
@@ -54,9 +56,7 @@ public class NARROWGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (narrowLOGIN(username,passphrase)) {
-                    initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
-                } else {
-                    invalidpassword();
+                    // OPEN MAIN GUI
                 }
             }
         });
@@ -65,9 +65,9 @@ public class NARROWGUI extends JFrame {
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyChar() == '\n') {
                     if (narrowLOGIN(username,passphrase)) {
+                        connect();
+                        // OPEN MAIN GUI
                         initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
-                    } else {
-                        invalidpassword();
                     }
                 }
             }
@@ -82,15 +82,6 @@ public class NARROWGUI extends JFrame {
         AGENCYLOGINLabel.setVisible(false);
         unauthorizedAccessOrUseLabel.setVisible(false);
         maincontainer.setVisible(true);
-        // THIS IS AN EXAMPLE OF WHAT THE FUNCTION DOES, WILL PRINT IN TERMINAL.
-        executeQuery("SELECT * FROM ALPHAAGENTS");
-    }
-
-    public void invalidpassword() {
-        JOptionPane.showMessageDialog(narrowLogin,
-                "You have entered an invalid password. Please try again.",
-                "Invalid password",
-                JOptionPane.ERROR_MESSAGE);
     }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
@@ -113,74 +104,29 @@ public class NARROWGUI extends JFrame {
         String password = passphrase.getText() + "cai-4-lyfe-88579";
         System.out.println(j + password);
         try {
-            if (connect(j, toHexString(getSHA(password)))) {
-                return true;
-            } else {
-                return false;
-            }
+            System.out.println(toHexString(getSHA(password)));
+            return true;
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
             return false;
         }
     }
-
-    static String[] executeQuery(String query) {
-        // USE THIS METHOD TO GET WHATEVER DATA YOU NEED, RETURNS STRING ARRAY WITH DATA.
-        // NOT FINISHED, WILL NEED MINOR MODIFICATION TO FILL THE RESULTS INSTEAD OF JUST PRINTING.
-        String results[] = {};
+    static void connect() {
         try {
-            // Aware that this would never be usable in a real program since you could just intercept the return value to gain access.
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
             Statement stmt = con.createStatement();
-            ResultSet resultSet = stmt.executeQuery(query);
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            while (resultSet.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = resultSet.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
-                System.out.println("");
-            }
+            ResultSet rs = stmt.executeQuery("SELECT * FROM BETAAGENTS");
+            while (rs.next())
+                System.out.println(rs.getString("PASSWORDS"));
             con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return results;
-    }
-
-    static boolean connect(String username, String password) {
-            boolean success = false;
-            try {
-                // Aware that this would never be usable in a real program since you could just intercept the return value to gain access.
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection con = DriverManager.getConnection(
-                        "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
-                Statement stmt = con.createStatement();
-                String query = "SELECT (CASE WHEN ALPHA.PASSWORDS = '" + password + "' THEN 'TRUE' ELSE 'FALSE' END) AS SUCCESS_ FROM ALPHAAGENTS ALPHA WHERE ALPHA.EMPID = '" + username + "'";
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    System.out.println(rs.getString("SUCCESS_").trim());
-                    if (rs.getString("SUCCESS_").trim().equals("TRUE")) {
-                        con.close();
-                        success = true;
-                    }
-                    if (success == true) {
-                        break;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                success = false;
-            }
-            System.out.println(success);
-            return success;
     }
 
     public static void main(String[] args) {
-    NARROWGUI x = new NARROWGUI();
-}
+        NARROWGUI x = new NARROWGUI();
+    }
 }
