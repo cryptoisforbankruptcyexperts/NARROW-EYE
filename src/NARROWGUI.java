@@ -28,8 +28,14 @@ public class NARROWGUI extends JFrame {
     private JPanel Administration;
     private JPanel Agents;
     private JPanel Missions;
+    private JLabel hello;
+    private JLabel akia;
+
+
+    private String userid = null;
 
     public NARROWGUI() {
+        akia.setText("Civilians KIA: " + civiliancasualties());
         try {
             final BufferedImage logo = ImageIO.read(getClass().getResource("res/logo.png"));
             setIconImage(logo);
@@ -52,6 +58,7 @@ public class NARROWGUI extends JFrame {
         setSize(1280,720);
         setVisible(true);
         setResizable(false);
+        hello.setText("Hello world");
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,6 +75,7 @@ public class NARROWGUI extends JFrame {
                         connect();
                         // OPEN MAIN GUI
                         initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
+                        userid = username.getText();
                     }
                 }
             }
@@ -82,6 +90,7 @@ public class NARROWGUI extends JFrame {
         AGENCYLOGINLabel.setVisible(false);
         unauthorizedAccessOrUseLabel.setVisible(false);
         maincontainer.setVisible(true);
+        civiliancasualties();
     }
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException
     {
@@ -109,6 +118,26 @@ public class NARROWGUI extends JFrame {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown for incorrect algorithm: " + e);
             return false;
+        }
+    }
+    static String civiliancasualties() {
+        try {
+            String returnedString = null;
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SUM(NUMBEROFPEOPLEKILLED) AS TOTALCiviliansKilled FROM TerroristActivities");
+            while (rs.next()){
+                returnedString = rs.getString("TOTALCIVILIANSKILLED");
+                if (returnedString != null) {
+                    break;
+                }
+            }
+            con.close();
+            return returnedString;
+        } catch (Exception e) {
+            return "Error";
         }
     }
     static void connect() {
