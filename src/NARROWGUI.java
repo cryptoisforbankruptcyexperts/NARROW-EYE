@@ -32,6 +32,10 @@ public class NARROWGUI extends JFrame {
     private JLabel akia;
     private JLabel mDLoc;
     private JLabel terrorist;
+    private JLabel mcpv;
+    private JLabel emrPats;
+    private JLabel cooep;
+    private JLabel mem;
 
 
     private String userid = null;
@@ -39,10 +43,12 @@ public class NARROWGUI extends JFrame {
 
     public NARROWGUI() {
         akia.setText("Civilians KIA: " + civiliancasualties());
-        //mDLoc.setText(""+mostDangerousLocation());
+        mDLoc.setText(mostDangerousLocation());
         terrorist.setText("Terrorist in Custody: "+TiC());
-
-
+        emrPats.setText("Emergency Patrols This Year: "+emerPatrols());
+        mcpv.setText("Most Common Police Vehicle (Current): "+mcpV());
+        cooep.setText("Current Officer(s) on Emergency Patrols: "+cooeP());
+        mem.setText(meM());
 
 
 
@@ -129,6 +135,26 @@ public class NARROWGUI extends JFrame {
             return false;
         }
     }
+    static String meM() {
+        try {
+            String returnedString = null;
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT EventName, SUM(MoneySpentOnEvent) AS MoneySpent  FROM Budget GROUP BY EventName ORDER BY MoneySpent DESC FETCH FIRST 5 ROWS ONLY");
+            while (rs.next()) {
+                returnedString = "Most Expensive Mission: "+rs.getString("EventName")+" - $"+rs.getString("MoneySpent");
+                if (returnedString != null) {
+                    break;
+                }
+            }
+            con.close();
+            return returnedString;
+        } catch (Exception e) {
+            return "Error";
+        }
+    }
     static String civiliancasualties() {
         try {
             String returnedString = null;
@@ -149,6 +175,49 @@ public class NARROWGUI extends JFrame {
             return "Error";
         }
     }
+    static String cooeP() {
+        try {
+            int i = 0;
+            String returnedString = "";
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select AlphaAgents.names FROM Patrolling,AlphaAgents WHERE AlphaAgents.EmpID=Patrolling.officerOnDuty AND Patrolling.PURPOSEOFPATROLLING = 'emergency'");
+            while (rs.next()) {
+                returnedString += rs.getString("names")+", ";
+                System.out.println(returnedString);
+                if (i==1) {
+                    break;
+                }
+                i++;
+            }
+            con.close();
+            return returnedString;
+        } catch (Exception e) {
+            return "Error";
+        }
+    }
+    static String emerPatrols() {
+        try {
+            String returnedString = null;
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Patrolling WHERE Patrolling.PURPOSEOFPATROLLING = 'emergency'");
+            while (rs.next()) {
+                returnedString = rs.getString("COUNT(*)");
+                if (returnedString != null) {
+                    break;
+                }
+            }
+            con.close();
+            return returnedString;
+        } catch (Exception e) {
+            return "Error";
+        }
+    }
     static String mostDangerousLocation() {
         try {
             String dateTime="", loc="", cost="";
@@ -158,9 +227,12 @@ public class NARROWGUI extends JFrame {
                     "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT dateTimes,incidentLocation FROM Causalities ORDER BY " +
-                    "AssetDamageInDollars DESC FETCH FIRST 10 ROWS ONLY;");
+                    "AssetDamageInDollars DESC FETCH FIRST 10 ROWS ONLY");
             while (rs.next()){
-                returnedString = rs.getString("DATETIMES");
+                dateTime = rs.getString("dateTimes");
+                loc = rs.getString("incidentLocation");
+                //cost = rs.getString("AssetDamageInDollars");
+                returnedString = "Most Dangerous Location: "+loc+"     Date: "+dateTime;
                 if (returnedString != null) {
                     break;
                 }
@@ -178,7 +250,7 @@ public class NARROWGUI extends JFrame {
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT NameOfTerrorists,ethnicity,IdentityNumber FROM TerroristsInformation WHERE InCustody = 'Yes';");
+            ResultSet rs = stmt.executeQuery("SELECT NameOfTerrorists,ethnicity,IdentityNumber FROM TerroristsInformation WHERE InCustody = 'Yes'");
             while (rs.next()) {
                 returnedString = rs.getString("NameOfTerrorists");
                 if (returnedString != null) {
@@ -191,7 +263,26 @@ public class NARROWGUI extends JFrame {
             return "Error";
         }
     }
-
+    static String mcpV() {
+        try {
+            String returnedString = null;
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select VehicleUsed,count(VehicleUsed) FROM Patrolling GROUP BY VehicleUsed ORDER BY count(VehicleUsed) DESC FETCH FIRST 5 ROWS ONLY");
+            while (rs.next()) {
+                returnedString = rs.getString("VehicleUsed");
+                if (returnedString != null) {
+                    break;
+                }
+            }
+            con.close();
+            return returnedString;
+        } catch (Exception e) {
+            return "Error";
+        }
+    }
     static void connect() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -206,6 +297,7 @@ public class NARROWGUI extends JFrame {
             System.out.println(e);
         }
     }
+
 
     public static void main(String[] args) {
         NARROWGUI x = new NARROWGUI();
