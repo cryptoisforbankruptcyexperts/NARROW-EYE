@@ -37,8 +37,6 @@ public class NARROWGUI extends JFrame {
     private JLabel cooep;
     private JLabel mem;
     private JLabel welcome47;
-    private JLabel partnera;
-    private JLabel partnerb;
     private JLabel EmpID;
     private JLabel Aliase;
     private JLabel supervisor;
@@ -48,21 +46,22 @@ public class NARROWGUI extends JFrame {
     private JLabel ethnic;
     private JLabel hite;
     private JLabel weapon;
-    private JLabel welcome;
+    private JLabel partnera;
+    private JLabel partnerb;
 
 
     private String userid = null;
     String weaponID = "";
 
     public NARROWGUI() {
-        /*akia.setText("Civilians KIA: " + civiliancasualties());
+        akia.setText("Civilians KIA: " + civiliancasualties());
         mDLoc.setText(mostDangerousLocation());
         terrorist.setText("Terrorist in Custody: "+TiC());
         emrPats.setText("Emergency Patrols This Year: "+emerPatrols());
         mcpv.setText("Most Common Police Vehicle (Current): "+mcpV());
         cooep.setText("Current Officer(s) on Emergency Patrols: "+cooeP());
         mem.setText(meM());
-        fillAgentTab("AE1461296");*/
+        fillAgentTab("AE1461296");
 
 
         try {

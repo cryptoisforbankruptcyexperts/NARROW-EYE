@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="narrowLogin" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1031" height="474"/>
+      <xy x="20" y="20" width="1031" height="510"/>
     </constraints>
     <properties>
       <enabled value="false"/>
@@ -136,7 +136,7 @@
               </component>
             </children>
           </grid>
-          <grid id="7f7b8" binding="Agents" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="7f7b8" binding="Agents" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Agents"/>
@@ -146,104 +146,95 @@
             <children>
               <vspacer id="8ea60">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="92f03" class="javax.swing.JLabel" binding="welcome">
+              <component id="d478e" class="javax.swing.JLabel" binding="weapon">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <disabledIcon value="welcome"/>
-                  <text value="Welcome, Agent 47"/>
-                </properties>
-              </component>
-              <component id="b6468" class="javax.swing.JLabel" binding="weapon">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Assigned Weapon: "/>
                 </properties>
               </component>
-              <component id="8a0b1" class="javax.swing.JLabel" binding="salary">
+              <component id="a0074" class="javax.swing.JLabel" binding="passport">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Salary:"/>
-                </properties>
-              </component>
-              <component id="bb461" class="javax.swing.JLabel" binding="passport">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Passport No.:"/>
                 </properties>
               </component>
-              <component id="88152" class="javax.swing.JLabel" binding="dLicense">
+              <component id="26a43" class="javax.swing.JLabel" binding="ethnic">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="License No.:"/>
-                </properties>
-              </component>
-              <component id="c44d0" class="javax.swing.JLabel" binding="ethnic">
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Ethnicity: "/>
                 </properties>
               </component>
-              <component id="bfc50" class="javax.swing.JLabel" binding="hite">
+              <component id="426bd" class="javax.swing.JLabel" binding="partnera">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Height: "/>
-                </properties>
-              </component>
-              <component id="a656c" class="javax.swing.JLabel" binding="partnera">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Partner A: AE1419185"/>
                 </properties>
               </component>
-              <component id="34435" class="javax.swing.JLabel" binding="partnerb">
+              <component id="57343" class="javax.swing.JLabel" binding="EmpID">
                 <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Partner B: AE1452412"/>
-                </properties>
-              </component>
-              <component id="65e0b" class="javax.swing.JLabel" binding="EmpID">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="EmpID: "/>
                 </properties>
               </component>
-              <component id="7dbe7" class="javax.swing.JLabel" binding="Aliase">
+              <component id="2c04d" class="javax.swing.JLabel" binding="supervisor">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Supervisor: "/>
+                </properties>
+              </component>
+              <component id="6719a" class="javax.swing.JLabel" binding="dLicense">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="License No.:"/>
+                </properties>
+              </component>
+              <component id="6284f" class="javax.swing.JLabel" binding="hite">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Height: "/>
+                </properties>
+              </component>
+              <component id="dc04" class="javax.swing.JLabel" binding="partnerb">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Partner B: AE1452412"/>
+                </properties>
+              </component>
+              <component id="56198" class="javax.swing.JLabel" binding="Aliase">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Current Aliase: "/>
                 </properties>
               </component>
-              <component id="27af9" class="javax.swing.JLabel" binding="supervisor">
+              <component id="8a0b1" class="javax.swing.JLabel" binding="salary">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Supervisor: "/>
+                  <text value="Salary:"/>
                 </properties>
               </component>
             </children>
