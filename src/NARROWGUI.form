@@ -18,14 +18,6 @@
         </constraints>
         <properties/>
       </component>
-      <component id="89015" class="javax.swing.JButton" binding="LOGINButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="LOGIN"/>
-        </properties>
-      </component>
       <component id="ae1bf" class="javax.swing.JLabel" binding="AGENCYLOGINLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
@@ -43,14 +35,6 @@
           <text value="Unauthorized access or use is a violation of law and may lead to prosecution."/>
         </properties>
       </component>
-      <component id="5c0b7" class="javax.swing.JPasswordField" binding="passphrase">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <tabbedpane id="b5092" binding="tabbedPane1" default-binding="true">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -63,12 +47,13 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="a1f47" binding="Home" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="a1f47" binding="Home" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Home"/>
             </constraints>
             <properties>
+              <focusable value="true"/>
               <opaque value="true"/>
             </properties>
             <border type="none"/>
@@ -86,6 +71,18 @@
                   <text value=""/>
                 </properties>
               </component>
+              <component id="6b2cf" class="javax.swing.JLabel" binding="welcome47">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <font name="Courier Std" size="16"/>
+                  <opaque value="true"/>
+                  <text value="Welcome, Agent 47."/>
+                  <visible value="false"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="a667b" binding="Administration" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -93,7 +90,11 @@
             <constraints>
               <tabbedpane title="Administration"/>
             </constraints>
-            <properties/>
+            <properties>
+              <font/>
+              <opaque value="true"/>
+              <visible value="false"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="1ff15" class="javax.swing.JLabel" binding="akia">
@@ -109,92 +110,201 @@
                   <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
+              <component id="20be6" class="javax.swing.JLabel" binding="terrorist">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Terrorist(s) Currently in Custody: "/>
+                </properties>
+              </component>
               <component id="86574" class="javax.swing.JLabel" binding="mDLoc">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Most Dangerous Location: Asset Damage: Date: "/>
                 </properties>
               </component>
-              <component id="20be6" class="javax.swing.JLabel" binding="terrorist">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Terrorist in Custody: "/>
-                </properties>
-              </component>
-              <component id="4ed5c" class="javax.swing.JLabel" binding="mcpv">
+              <component id="47044" class="javax.swing.JLabel" binding="mem">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Most Common Police Vehicle (Current): "/>
-                </properties>
-              </component>
-              <component id="a9e1a" class="javax.swing.JLabel" binding="emrPats">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Emergency Patrols This Year: "/>
-                </properties>
-              </component>
-              <component id="2faa" class="javax.swing.JLabel" binding="cooep">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Current Officer(s) on Emergency Patrols: "/>
-                </properties>
-              </component>
-              <component id="47044" class="javax.swing.JLabel" binding="mem">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Most Expensive Mission: "/>
-                </properties>
-              </component>
-              <component id="afb24" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Total Agents KIA:"/>
-                </properties>
-              </component>
-              <component id="e6295" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Total Agents KIA:"/>
+                  <text value="Current Most Expensive Mission: "/>
                 </properties>
               </component>
             </children>
           </grid>
-          <grid id="7f7b8" binding="Agents" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="7f7b8" binding="Agents" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Agents"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <vspacer id="8ea60">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="92f03" class="javax.swing.JLabel" binding="welcome">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <disabledIcon value="welcome"/>
+                  <text value="Welcome, Agent 47"/>
+                </properties>
+              </component>
+              <component id="b6468" class="javax.swing.JLabel" binding="weapon">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Assigned Weapon: "/>
+                </properties>
+              </component>
+              <component id="8a0b1" class="javax.swing.JLabel" binding="salary">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Salary:"/>
+                </properties>
+              </component>
+              <component id="bb461" class="javax.swing.JLabel" binding="passport">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Passport No.:"/>
+                </properties>
+              </component>
+              <component id="88152" class="javax.swing.JLabel" binding="dLicense">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="License No.:"/>
+                </properties>
+              </component>
+              <component id="c44d0" class="javax.swing.JLabel" binding="ethnic">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Ethnicity: "/>
+                </properties>
+              </component>
+              <component id="bfc50" class="javax.swing.JLabel" binding="hite">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Height: "/>
+                </properties>
+              </component>
+              <component id="a656c" class="javax.swing.JLabel" binding="partnera">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Partner A: AE1419185"/>
+                </properties>
+              </component>
+              <component id="34435" class="javax.swing.JLabel" binding="partnerb">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Partner B: AE1452412"/>
+                </properties>
+              </component>
+              <component id="65e0b" class="javax.swing.JLabel" binding="EmpID">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="EmpID: "/>
+                </properties>
+              </component>
+              <component id="7dbe7" class="javax.swing.JLabel" binding="Aliase">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Current Aliase: "/>
+                </properties>
+              </component>
+              <component id="27af9" class="javax.swing.JLabel" binding="supervisor">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Supervisor: "/>
+                </properties>
+              </component>
+            </children>
           </grid>
-          <grid id="2786a" binding="Missions" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="2786a" binding="Missions" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Missions"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="43184" class="javax.swing.JLabel" binding="mcpv">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Most Common Police Vehicles: "/>
+                </properties>
+              </component>
+              <vspacer id="e1fe0">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <component id="b0c84" class="javax.swing.JLabel" binding="emrPats">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Emergency Patrols This Year: "/>
+                </properties>
+              </component>
+              <component id="6eecd" class="javax.swing.JLabel" binding="cooep">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Current Agent(s) on Emergency Patrols: "/>
+                </properties>
+              </component>
+            </children>
           </grid>
         </children>
       </tabbedpane>
+      <component id="89015" class="javax.swing.JButton" binding="LOGINButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="LOGIN"/>
+        </properties>
+      </component>
+      <component id="5c0b7" class="javax.swing.JPasswordField" binding="passphrase">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>

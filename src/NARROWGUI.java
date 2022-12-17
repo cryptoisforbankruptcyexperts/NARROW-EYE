@@ -36,20 +36,33 @@ public class NARROWGUI extends JFrame {
     private JLabel emrPats;
     private JLabel cooep;
     private JLabel mem;
+    private JLabel welcome47;
+    private JLabel partnera;
+    private JLabel partnerb;
+    private JLabel EmpID;
+    private JLabel Aliase;
+    private JLabel supervisor;
+    private JLabel salary;
+    private JLabel passport;
+    private JLabel dLicense;
+    private JLabel ethnic;
+    private JLabel hite;
+    private JLabel weapon;
+    private JLabel welcome;
 
 
     private String userid = null;
-
+    String weaponID = "";
 
     public NARROWGUI() {
-        akia.setText("Civilians KIA: " + civiliancasualties());
+        /*akia.setText("Civilians KIA: " + civiliancasualties());
         mDLoc.setText(mostDangerousLocation());
         terrorist.setText("Terrorist in Custody: "+TiC());
         emrPats.setText("Emergency Patrols This Year: "+emerPatrols());
         mcpv.setText("Most Common Police Vehicle (Current): "+mcpV());
         cooep.setText("Current Officer(s) on Emergency Patrols: "+cooeP());
         mem.setText(meM());
-
+        fillAgentTab("AE1461296");*/
 
 
         try {
@@ -70,6 +83,55 @@ public class NARROWGUI extends JFrame {
         }
     }
 
+    void fillAgentTab(String empID) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from alphaagents");
+            while (rs.next()) {
+                if(rs.getString("EMPID").equals(empID)) {
+                    EmpID.setText("EmpID: "+empID);
+                    weaponID = rs.getString("WEAPONID");
+                    Aliase.setText("Alise: "+rs.getString("ALIASES"));
+                    supervisor.setText("Supervisor: "+rs.getString("SUPERVISORNAME"));
+                    salary.setText("Salary: $"+rs.getString("SALARY"));
+                    dLicense.setText("License No.: "+rs.getString("DRIVERSLICENCE"));
+                    passport.setText("Passport No.: "+rs.getString("PASSPORTNO"));
+                    ethnic.setText("Ethnicity: "+rs.getString("ETHNICITY"));
+                    hite.setText("Height: "+rs.getString("HEIGHT"));
+                    weapon.setText("Assigned Weapon: "+getWeapon(weaponID));
+                }
+            }
+            con.close();
+            return;
+        } catch (Exception e) {
+            System.out.println("Error on Fill Agent.");
+            return;
+        }
+
+    }
+    String getWeapon(String weaponID){
+        try {
+            String actualWeapon = "";
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select serialno, nameoftheweapon from weaponsdata");
+            while (rs.next()) {
+                if(rs.getString("SERIALNO").equals(weaponID)) {
+                    actualWeapon = rs.getString("NAMEOFTHEWEAPON");
+                }
+            }
+            con.close();
+            return actualWeapon;
+        } catch (Exception e) {
+            System.out.println("Error on Fill Agent.");
+            return "bruh";
+        }
+    }
     public boolean n_Login() throws Exception{
         setSize(1280,720);
         setVisible(true);
@@ -89,6 +151,7 @@ public class NARROWGUI extends JFrame {
                     if (narrowLOGIN(username,passphrase)) {
                         connect();
                         // OPEN MAIN GUI
+                        welcome47.setVisible(true);
                         initialize(username,passphrase,LOGINButton,AGENCYLOGINLabel,unauthorizedAccessOrUseLabel,tabbedPane1);
                         userid = username.getText();
                     }
@@ -186,8 +249,7 @@ public class NARROWGUI extends JFrame {
             ResultSet rs = stmt.executeQuery("select AlphaAgents.names FROM Patrolling,AlphaAgents WHERE AlphaAgents.EmpID=Patrolling.officerOnDuty AND Patrolling.PURPOSEOFPATROLLING = 'emergency'");
             while (rs.next()) {
                 returnedString += rs.getString("names")+", ";
-                System.out.println(returnedString);
-                if (i==1) {
+                if (i==7) {
                     break;
                 }
                 i++;
@@ -245,17 +307,19 @@ public class NARROWGUI extends JFrame {
     }
     static String TiC() {
         try {
-            String returnedString = null;
+            int i = 0;
+            String returnedString = "";
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT NameOfTerrorists,ethnicity,IdentityNumber FROM TerroristsInformation WHERE InCustody = 'Yes'");
             while (rs.next()) {
-                returnedString = rs.getString("NameOfTerrorists");
-                if (returnedString != null) {
+                returnedString += rs.getString("NameOfTerrorists")+", ";
+                if (i==5) {
                     break;
                 }
+                i++;
             }
             con.close();
             return returnedString;
@@ -265,17 +329,15 @@ public class NARROWGUI extends JFrame {
     }
     static String mcpV() {
         try {
-            String returnedString = null;
+            String returnedString = "";
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection con = DriverManager.getConnection(
                     "jdbc:oracle:thin:@oracle2.wiu.edu:1521/orclpdb1", "F22_TEAM_17", "kl98oPFo");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select VehicleUsed,count(VehicleUsed) FROM Patrolling GROUP BY VehicleUsed ORDER BY count(VehicleUsed) DESC FETCH FIRST 5 ROWS ONLY");
             while (rs.next()) {
-                returnedString = rs.getString("VehicleUsed");
-                if (returnedString != null) {
-                    break;
-                }
+                returnedString += rs.getString("VehicleUsed")+", ";
+
             }
             con.close();
             return returnedString;
